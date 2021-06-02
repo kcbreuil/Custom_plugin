@@ -16,17 +16,17 @@
  
  function register_collection_cpt() {
     
-    register_post_type('activity', [
-         'label' => 'Activities',
+    register_post_type('Item', [
+         'label' => 'Collection',
          'public' => true,
          'capability_type' => 'post',
          'menu_icon' => 'dashicons-admin-customizer',
      ]);
  }
 
- add_action( 'init', 'get_activities_from_api' );
+ add_action( 'init', 'get_item_from_api' );
 
- function get_activities_from_api() {
+ function get_item_from_api() {
 
     $collection = [];
 
@@ -55,8 +55,8 @@ function store_inside_post($results) {
     
     // Create post object
     $my_post = array(
-        'post_type' => 'activity',
-        'post_title'=> sanitize_title($results->activity),
+        'post_type' => 'item',
+        'post_title'=> 'Item: ' . sanitize_title($results->key),
         'post_content' =>  'Activity: ' . $results->activity . ' | ' . 'Type: ' . $results->type . ' | ' . 'Number of Participants: ' . $results->participants,
         'post_status' => 'publish',
         'post_author' => 1
